@@ -31,11 +31,12 @@ int numGenerate(int playG[][4], const int iTemp, const int jTemp)
 
 bool gameOver(int field[][4])
 {
+	int count = 1;
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 4; j++)
 		{
-			if (field[i][j] > field[i][j + 1])
+			if (field[i][j] != count++)
 			{
 				return false;
 			}
