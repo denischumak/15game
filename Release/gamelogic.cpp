@@ -59,18 +59,18 @@ int main()
 	srand(time(NULL));
 
 	int field[4][4];
-	const int WIDTH = 129; // øèðèíà ñïðàéòà
+	const int WIDTH = 129; // ширина спрайта
 	Sprite sprites[16];
 	int moveCounter = 0; 
 
-	// íà÷àëüíîå ìåíþ
+	// начальное меню
 	startGameScreen(window, moveCounter, field);
 	
 	Texture texture;
 	texture.loadFromFile("texturepack/15pieces.png");
 
 
-	// âûðåçêà ñïðàéòîâ
+	// вырезка спрайтов
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -83,11 +83,11 @@ int main()
 	while (window.isOpen())
 	{
 		Event event;
-		bool inEvent = false; // çàäåðæêà íà èâåíòû
+		bool inEvent = false; // задержка на ивенты
 
 		while (window.pollEvent(event))
 		{
-			// íàæàëè esc - èäåì â ìåíþ
+			// нажали esc - идем в меню
 			if (Keyboard::isKeyPressed(Keyboard::Escape)){ startGameScreen(window, moveCounter, field, 1); }
 
 			if (event.type == Event::Closed) { window.close(); }
@@ -99,7 +99,7 @@ int main()
 				{
 					inEvent = true;
 
-					// ïåðåâîäèì êîîðäèíàòû êóðñîðà â ÿ÷åéêè ìàññèâà
+					// переводим координаты курсора в ячейки массива
 					Vector2i position = Mouse::getPosition(window);
 					int x = position.x / WIDTH;
 					int y = position.y / WIDTH;
@@ -107,7 +107,7 @@ int main()
 					int dx = 0, dy = 0;
 					bool found = false;
 
-					// îòñëåæèâàåì ãäå ïóñòàÿ êëåòêà
+					// отслеживаем где пустая клетка
 					if (field[y + 1][x] == 16 && y != 3 ) { dy = 1; found = true; }
 
 					if (field[y - 1][x] == 16 && y != 0) { dy = -1; found = true; }
@@ -116,20 +116,20 @@ int main()
 
 					if (field[y][x - 1] == 16 && x != 0) { dx = -1; found = true; }
 
-					// îáìåí ÿ÷ååê
+					// обмен ячеек
 					int temp = field[y][x];
 					field[y][x] = field[y + dy][x + dx];
 					field[y + dy][x + dx] = temp;
 
-					// åñëè ðÿäîì áåëûé ñïðàéò
+					// если рядом белый спрайт
 					if (found)
 					{
 						moveCounter++;
 
-						//ñêîðîñòü àíèìàöèè
+						//скорость анимации
 						int speed = 13;
 						
-						// àíèìàöèÿ ïåðåìåùåíèÿ
+						// анимация перемещения
 						sprites[15].move(-dx * WIDTH, -dy * WIDTH);
 						for (int i = 0; i < WIDTH; i += speed)
 						{
@@ -143,7 +143,7 @@ int main()
 			}
 		}
 
-		// îòðèñîâêà ñïðàéòîâ
+		// отрисовка спрайтов
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -156,12 +156,12 @@ int main()
 
 		window.display();
 
-		// åñëè èãðà îêîí÷åíà
+		// если игра окончена
 		if (gameOver(field))
 		{
 			endGameScreen(window, moveCounter);
 
-			// åñëè áûëî âûáðàíî menu
+			// если было выбрано menu
 			if (window.isOpen())
 			{
 				startGameScreen(window, moveCounter, field);
