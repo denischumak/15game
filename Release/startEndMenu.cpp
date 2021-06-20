@@ -31,7 +31,7 @@ void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int
 
 	while (!menuClose)
 	{
-		// таймер
+		// С‚Р°Р№РјРµСЂ
 		Time time = clock.getElapsedTime();
 
 		window.clear(Color(51, 51, 54));
@@ -50,35 +50,35 @@ void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int
 
 		for (int i = 1; i < 5; i++) { spritegrid[i].setColor(Color::White); }
 
-		// кнопка continue
+		// РєРЅРѕРїРєР° continue
 		if (IntRect(19, 131, 305, 60).contains(Mouse::getPosition(window)) && drawContinue)
 		{
 			spritegrid[5].setColor(Color(255, 153, 0));
 			menuOption = 1;
 		}
 
-		// кнопка new game
+		// РєРЅРѕРїРєР° new game
 		if (IntRect(19, 218, 337, 65).contains(Mouse::getPosition(window)))
 		{
 			spritegrid[1].setColor(Color(91, 127, 125));
 			menuOption = 2;
 		}
 		
-		// кнопка about
+		// РєРЅРѕРїРєР° about
 		if (IntRect(19, 306, 229, 67).contains(Mouse::getPosition(window)))
 		{
 			spritegrid[2].setColor(Color(91, 127, 125));
 			menuOption = 3;
 		}
 
-		// кнопка quit
+		// РєРЅРѕРїРєР° quit
 		if (IntRect(19, 401, 154, 73).contains(Mouse::getPosition(window)))
 		{
 			spritegrid[3].setColor(Color(91, 127, 125));
 			menuOption = 4;
 		}
 
-		// пасхалка с лого
+		// РїР°СЃС…Р°Р»РєР° СЃ Р»РѕРіРѕ
 		if (IntRect(7, 12, 501, 89).contains(Mouse::getPosition(window)))
 		{
 			menuOption = 5;
@@ -88,7 +88,7 @@ void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int
 		{
 			if (menuOption == 1) { menuClose = true; }
 
-			// new game - генерируем новый массив
+			// РЅР°Р¶Р°Р»Рё new game - РіРµРЅРµСЂРёСЂСѓРµРј РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
 			if (menuOption == 2)
 			{
 				for (int i = 0; i < 4; i++)
@@ -104,7 +104,7 @@ void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int
 
 			}
 
-			// задержка на кнопку about
+			// Р·Р°РґРµСЂР¶РєР° РЅР° РєРЅРѕРїРєСѓ about Рё РµРµ РѕС‚СЂРёСЃРѕРІРєР°
 			if (menuOption == 3 && time.asSeconds() > 0.2)
 			{
 				window.draw(spritegrid[6]);
@@ -123,7 +123,7 @@ void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int
 
 			if (menuOption == 4) { window.close(); menuClose = true; }
 
-			// задержка на нажатия по лого
+			// Р·Р°РґРµСЂР¶РєР° РЅР° РЅР°Р¶Р°С‚РёСЏ РїРѕ Р»РѕРіРѕ Рё РѕС‚СЂРёСЃРѕРІРєР°
 			if (menuOption == 5 && time.asSeconds() > 0.15)
 			{
 				spritegrid[0].setColor(Color(rand() % 256 , rand() % 256, rand() % 256)); 
@@ -188,18 +188,18 @@ void endGameScreen(RenderWindow& window, int movecounter)
 			}
 		}
 
-		// подсвечиваем menu и quit
+		// РїРѕРґСЃРІРµС‡РёРІР°РµРј menu Рё quit
 		spritegrid[3].setColor(Color::White);
 		spritegrid[4].setColor(Color::White);
 
-		// кнопка menu
+		// РєРЅРѕРїРєР° menu
 		if (IntRect(19, 306, 181, 63).contains(Mouse::getPosition(window)))
 		{
 			spritegrid[3].setColor(Color(91, 127, 125));
 			menuOption = 1;
 		}
 
-		// кнопка quit
+		// РєРЅРѕРїРєР° quit
 		if (IntRect(19, 401, 154, 73).contains(Mouse::getPosition(window)))
 		{
 			spritegrid[4].setColor(Color(91, 127, 125));
@@ -214,7 +214,7 @@ void endGameScreen(RenderWindow& window, int movecounter)
 			if (menuOption == 2) { window.close(); menuClose = 1;}
 		}
 
-		// отрисовывает спрайты и счет
+		// РѕС‚СЂРёСЃРѕРІС‹РІР°РµС‚ СЃРїСЂР°Р№С‚С‹ Рё СЃС‡РµС‚
 		for (int i = 0; i < 6; i++)
 		{
 			text.setString(std::to_string(movecounter));
