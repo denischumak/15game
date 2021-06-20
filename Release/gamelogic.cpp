@@ -6,6 +6,7 @@ using namespace sf;
 void startGameScreen(RenderWindow& window, int& moveCounter, int field[][4], int drawContinue = 0);
 void endGameScreen(RenderWindow &window, int movecounter);
 
+// –≥–µ–Ω–µ—Ä–∏—Ä—É–µ—Ç —Å–ª—É—á–∞–π–Ω–æ–µ —á–∏—Å–ª–æ
 int numGenerate(int playG[][4], const int iTemp, const int jTemp)
 {
 	int random = 1 + rand() % 16;
@@ -29,6 +30,7 @@ int numGenerate(int playG[][4], const int iTemp, const int jTemp)
 	return random;
 }
 
+// –ø—Ä–æ–≤–µ—Ä–∫–∞ –Ω–∞ –æ–∫–æ–Ω—á–∞–Ω–∏–µ –∏–≥—Ä—ã
 bool gameOver(int field[][4])
 {
 	for (int i = 0; i < 4; i++)
@@ -57,18 +59,18 @@ int main()
 	srand(time(NULL));
 
 	int field[4][4];
-	const int WIDTH = 129; // ¯ËËÌ‡ ÒÔ‡ÈÚ‡
+	const int WIDTH = 129; // √∏√®√∞√®√≠√† √±√Ø√∞√†√©√≤√†
 	Sprite sprites[16];
 	int moveCounter = 0; 
 
-	// Ì‡˜‡Î¸ÌÓÂ ÏÂÌ˛
+	// √≠√†√∑√†√´√º√≠√Æ√• √¨√•√≠√æ
 	startGameScreen(window, moveCounter, field);
 	
 	Texture texture;
 	texture.loadFromFile("texturepack/15pieces.png");
 
 
-	// ‚˚ÂÁÍ‡ ÒÔ‡ÈÚÓ‚
+	// √¢√ª√∞√•√ß√™√† √±√Ø√∞√†√©√≤√Æ√¢
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -81,11 +83,11 @@ int main()
 	while (window.isOpen())
 	{
 		Event event;
-		bool inEvent = false; // Á‡‰ÂÊÍ‡ Ì‡ Ë‚ÂÌÚ˚
+		bool inEvent = false; // √ß√†√§√•√∞√¶√™√† √≠√† √®√¢√•√≠√≤√ª
 
 		while (window.pollEvent(event))
 		{
-			// Ì‡Ê‡ÎË esc - Ë‰ÂÏ ‚ ÏÂÌ˛
+			// √≠√†√¶√†√´√® esc - √®√§√•√¨ √¢ √¨√•√≠√æ
 			if (Keyboard::isKeyPressed(Keyboard::Escape)){ startGameScreen(window, moveCounter, field, 1); }
 
 			if (event.type == Event::Closed) { window.close(); }
@@ -97,7 +99,7 @@ int main()
 				{
 					inEvent = true;
 
-					// ÔÂÂ‚Ó‰ËÏ ÍÓÓ‰ËÌ‡Ú˚ ÍÛÒÓ‡ ‚ ˇ˜ÂÈÍË Ï‡ÒÒË‚‡
+					// √Ø√•√∞√•√¢√Æ√§√®√¨ √™√Æ√Æ√∞√§√®√≠√†√≤√ª √™√≥√∞√±√Æ√∞√† √¢ √ø√∑√•√©√™√® √¨√†√±√±√®√¢√†
 					Vector2i position = Mouse::getPosition(window);
 					int x = position.x / WIDTH;
 					int y = position.y / WIDTH;
@@ -105,7 +107,7 @@ int main()
 					int dx = 0, dy = 0;
 					bool found = false;
 
-					// ÓÚÒÎÂÊË‚‡ÂÏ „‰Â ÔÛÒÚ‡ˇ ÍÎÂÚÍ‡
+					// √Æ√≤√±√´√•√¶√®√¢√†√•√¨ √£√§√• √Ø√≥√±√≤√†√ø √™√´√•√≤√™√†
 					if (field[y + 1][x] == 16 && y != 3 ) { dy = 1; found = true; }
 
 					if (field[y - 1][x] == 16 && y != 0) { dy = -1; found = true; }
@@ -114,20 +116,20 @@ int main()
 
 					if (field[y][x - 1] == 16 && x != 0) { dx = -1; found = true; }
 
-					// Ó·ÏÂÌ ˇ˜ÂÂÍ
+					// √Æ√°√¨√•√≠ √ø√∑√•√•√™
 					int temp = field[y][x];
 					field[y][x] = field[y + dy][x + dx];
 					field[y + dy][x + dx] = temp;
 
-					// ÂÒÎË ˇ‰ÓÏ ·ÂÎ˚È ÒÔ‡ÈÚ
+					// √•√±√´√® √∞√ø√§√Æ√¨ √°√•√´√ª√© √±√Ø√∞√†√©√≤
 					if (found)
 					{
 						moveCounter++;
 
-						//ÒÍÓÓÒÚ¸ ‡ÌËÏ‡ˆËË
+						//√±√™√Æ√∞√Æ√±√≤√º √†√≠√®√¨√†√∂√®√®
 						int speed = 13;
 						
-						// ‡ÌËÏ‡ˆËˇ ÔÂÂÏÂ˘ÂÌËˇ
+						// √†√≠√®√¨√†√∂√®√ø √Ø√•√∞√•√¨√•√π√•√≠√®√ø
 						sprites[15].move(-dx * WIDTH, -dy * WIDTH);
 						for (int i = 0; i < WIDTH; i += speed)
 						{
@@ -141,7 +143,7 @@ int main()
 			}
 		}
 
-		// ÓÚËÒÓ‚Í‡ ÒÔ‡ÈÚÓ‚
+		// √Æ√≤√∞√®√±√Æ√¢√™√† √±√Ø√∞√†√©√≤√Æ√¢
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -154,12 +156,12 @@ int main()
 
 		window.display();
 
-		// ÂÒÎË Ë„‡ ÓÍÓÌ˜ÂÌ‡
+		// √•√±√´√® √®√£√∞√† √Æ√™√Æ√≠√∑√•√≠√†
 		if (gameOver(field))
 		{
 			endGameScreen(window, moveCounter);
 
-			// ÂÒÎË ·˚ÎÓ ‚˚·‡ÌÓ menu
+			// √•√±√´√® √°√ª√´√Æ √¢√ª√°√∞√†√≠√Æ menu
 			if (window.isOpen())
 			{
 				startGameScreen(window, moveCounter, field);
